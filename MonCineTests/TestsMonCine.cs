@@ -302,19 +302,19 @@ namespace MonCineTests
 
         }
 
-        [TestMethod]
-        public void ModifyActeurTest()
-        {
+        //[TestMethod]
+        //public void ModifyActeurTest()
+        //{
 
-            DAL dal = new DAL();
-            var foundActeur = dal.ReadActeurs().Find(x => x.Nom == acteurTestUnitaire.Nom);
-            foundActeur.Age = 55;
-            dal.UpdateActeur(foundActeur);
+        //    DAL dal = new DAL();
+        //    var foundActeur = dal.ReadActeurs().Find(x => x.Nom == acteurTestUnitaire.Nom);
+        //    foundActeur.Age = 55;
+        //    dal.UpdateActeur(foundActeur);
 
-            var actualActeur = dal.ReadActeurs().Find(x => x.Nom == acteurTestUnitaire.Nom);
+        //    var actualActeur = dal.ReadActeurs().Find(x => x.Nom == acteurTestUnitaire.Nom);
 
-            Assert.AreEqual(55, actualActeur.Age);
-        }
+        //    Assert.AreEqual(55, actualActeur.Age);
+        //}
 
         [TestMethod]
         public void RemoveActeurTest()
