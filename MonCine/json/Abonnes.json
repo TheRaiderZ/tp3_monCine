@@ -1,0 +1,125 @@
+[{
+  "_id": {
+    "$oid": "6255a6354b1fe3a9998169d7"
+  },
+  "Prenom": "Philacte",
+  "Nom": "Patente",
+  "Age": 0,
+  "Username": "Tim",
+  "DateAdhesion": {
+    "$date": {
+      "$numberLong": "1649736000000"
+    }
+  },
+  "recompenses": [
+    {
+      "type": 0,
+      "film": {
+        "_id": {
+          "$oid": "62656bf4f6779d3f44b4b851"
+        },
+        "Nom": "Film Test 2",
+        "DateSortie": {
+          "$date": {
+            "$numberLong": "1655054098485"
+          }
+        },
+        "DateProjection": {
+          "$date": {
+            "$numberLong": "-62135596800000"
+          }
+        },
+        "SurAffiche": false,
+        "Acteurs": [
+          {
+            "Prenom": "Acteur",
+            "Nom": "1",
+            "Age": 12,
+            "_id": {
+              "$oid": "62617f2b90ce04064e4944ec"
+            }
+          }
+        ],
+        "Realisateur": {
+          "Prenom": "Paul",
+          "Nom": "Test2",
+          "Age": 535,
+          "_id": {
+            "$oid": "625f1967a129b705eb500154"
+          }
+        },
+        "Categories": [
+          1,
+          4,
+          0,
+          2,
+          6
+        ],
+        "Notes": null,
+        "NbProjections": 0
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6255a6c0c138cd2d883bd56d"
+  },
+  "Prenom": "Jean",
+  "Nom": "Legrand",
+  "Age": 0,
+  "Username": "Troylus de Mèsgouène",
+  "DateAdhesion": {
+    "$date": {
+      "$numberLong": "1649736000000"
+    }
+  },
+  "recompenses": [
+    {
+      "type": 0,
+      "film": {
+        "_id": {
+          "$oid": "6255b3b4f651373e656f071e"
+        },
+        "Nom": "Film Test 3",
+        "DateSortie": {
+          "$date": {
+            "$numberLong": "1655054098485"
+          }
+        },
+        "DateProjection": {
+          "$date": {
+            "$numberLong": "-62135596800000"
+          }
+        },
+        "SurAffiche": false,
+        "Acteurs": [
+          {
+            "Prenom": "Acteur",
+            "Nom": "1",
+            "Age": 12,
+            "_id": {
+              "$oid": "62617f2b90ce04064e4944ec"
+            }
+          }
+        ],
+        "Realisateur": {
+          "Prenom": "Paul",
+          "Nom": "Test2",
+          "Age": 535,
+          "_id": {
+            "$oid": "625f1967a129b705eb500154"
+          }
+        },
+        "Categories": [
+          1,
+          4,
+          0,
+          2,
+          6
+        ],
+        "Notes": null,
+        "NbProjections": 0
+      }
+    }
+  ]
+}]

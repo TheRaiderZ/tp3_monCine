@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "62617f2b90ce04064e4944ec"
+  },
+  "Age": 12,
+  "Nom": "1",
+  "Prenom": "Acteur"
+},{
+  "_id": {
+    "$oid": "6262e6be55a6a85d7dab19fd"
+  },
+  "Age": 58,
+  "Nom": "2",
+  "Prenom": "Acteur"
+},{
+  "_id": {
+    "$oid": "6262e6be55a6a85d7dab19fe"
+  },
+  "Age": 47,
+  "Nom": "3",
+  "Prenom": "Acteur"
+},{
+  "_id": {
+    "$oid": "6262e6be55a6a85d7dab19ff"
+  },
+  "Age": 42,
+  "Nom": "4",
+  "Prenom": "Acteur"
+},{
+  "_id": {
+    "$oid": "6262e6be55a6a85d7dab1a00"
+  },
+  "Age": 64,
+  "Nom": "5",
+  "Prenom": "Acteur"
+}]

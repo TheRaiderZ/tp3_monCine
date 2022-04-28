@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "625f1967a129b705eb500154"
+  },
+  "Prenom": "Paul",
+  "Nom": "Test2",
+  "Age": 535
+},{
+  "_id": {
+    "$oid": "6262e78911124827109fbfa1"
+  },
+  "Prenom": "Bob",
+  "Nom": "PierreTest",
+  "Age": 43
+}]
