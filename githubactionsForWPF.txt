@@ -55,3 +55,4 @@ jobs: #liste des actions qui seront déclenchées par le workflow
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pattern: TP214E/bin/Release/netcoreapp3.1/win-x64/publish/*.exe #path vers votre exécutable
           release-url: ${{ steps.create_release.outputs.upload_url }}
+          
