@@ -13,10 +13,19 @@ namespace MonCine.Data
             this.DateAdhesion = DateTime.Now;
         }
 
+        public Abonne(string prenom, string nom, int age, string username, Preferences preferences) : base(prenom, nom, age)
+        {
+            this.Username = username;
+            this.DateAdhesion = DateTime.Now;
+            this.Preferences = preferences;
+        }
+
+
         //public ObjectId Id { get; set; }
         public string Username { get; set; }
         public DateTime DateAdhesion { get; set; }
         public List<Recompense> Recompenses { get; set; }
+        public Preferences Preferences { get; set; }
 
 
 

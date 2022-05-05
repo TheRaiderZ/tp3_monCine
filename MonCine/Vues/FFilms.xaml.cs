@@ -41,8 +41,8 @@ namespace MonCine.Vues
         private void PopulateListViews()
         {
             listeFilms.ItemsSource = Films; listeFilms.DataContext = Films;
-            listeRealisateurs.ItemsSource = Realisateurs; listeRealisateurs.DataContext = Realisateurs;
-            listeActeurs.ItemsSource = Acteurs; listeRealisateurs.DataContext = Acteurs;
+            listeRealisateurs.ItemsSource = Realisateurs;
+            listeActeurs.ItemsSource = Acteurs;
             listeCategories.ItemsSource = Enum.GetValues(typeof(Categorie));
         }
 

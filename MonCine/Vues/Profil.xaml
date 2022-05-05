@@ -1,0 +1,54 @@
+﻿<Window x:Class="MonCine.Vues.Profil"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MonCine.Vues"
+        mc:Ignorable="d"
+        Title="Profil" Height="450" Width="800">
+    <Grid Margin="0,0,0,0" Background="#FF246EE9" OpacityMask="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--</ListView>-->
+        <Button x:Name="btnBack" Content="Fermer" Margin="20,14,676,0" Click="btnBack_Click" MinWidth="104" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Height="30" VerticalAlignment="Top">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Border Margin="10,10,10,95" Grid.Row="1" CornerRadius="10" Background="#FF042A2B" HorizontalAlignment="Stretch">
+            <GroupBox Header="Info de l'abonné"  Background="#FF042A2B" Foreground="White" BorderThickness="0" Margin="0,0,0,-25">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="44*"/>
+                        <RowDefinition Height="85*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="89*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Nom :" HorizontalAlignment="Left" Margin="38,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBox Text="{Binding Abonne.Nom}" x:Name="txtNom" Margin="87,9,28,10" TextWrapping="Wrap" IsEnabled="False"/>
+                    <Label Content="Catégories :" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" Foreground="White" Grid.Row="1"/>
+                    <Label Content="Réalisateurs :" HorizontalAlignment="Left" Margin="10,1,0,0" VerticalAlignment="Top" Foreground="White" Height="44" Grid.Row="2"/>
+                    <ListBox  x:Name="listeCategories" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="87,9,29,9" SelectionMode="Multiple" SelectionChanged="listeCategories_SelectionChanged" local:ListBoxExtensions.SelectedItemList="{Binding Abonne.Preferences.CategoriesFavoris}" Grid.Row="1" />
+                    <!--<ListBox  local:ListBoxExtensions.SelectedItemList="{Binding Abonne.Preferences.RealisateursFavoris}"  d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="listeRealisateurs" Margin="87,6,28,10" Grid.Row="2" SelectionMode="Multiple" SelectionChanged="listeRealisateurs_SelectionChanged"/>-->
+                    <ListBox  x:Name="listeRealisateurs" Margin="87,6,28,10" SelectionMode="Multiple" local:ListBoxExtensions.SelectedItemList="{Binding Abonne.Preferences.RealisateursFavoris}"  SelectionChanged="listeRealisateurs_SelectionChanged" Grid.Row="2" />
+                    <Label Content="Acteurs :" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Foreground="White" Grid.Row="3"/>
+                    <ListBox  x:Name="listeActeurs" Margin="87,7,29,14" SelectionMode="Multiple" local:ListBoxExtensions.SelectedItemList="{Binding Abonne.Preferences.ActeursFavoris}" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listeActeurs_SelectionChanged" Grid.Row="3" />
+                </Grid>
+            </GroupBox>
+        </Border>
+        <Button x:Name="btnSave" Content="Enregistrer les changements" Margin="539,0,89,18" Click="btnSave_Click" Grid.Row="1" Height="40" VerticalAlignment="Bottom"/>
+
+    </Grid>
+</Window>

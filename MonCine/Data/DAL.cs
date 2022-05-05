@@ -64,6 +64,34 @@ namespace MonCine.Data
             }
             return abonnes;
         }
+        public void AddAbonne(Abonne abonne)
+        {
+            try
+            {
+                var collection = database.GetCollection<Abonne>("Abonnes");
+                collection.InsertOne(abonne);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'ajouter un abonne " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
+        public void UpdateAbonne(Abonne abonne)
+        {
+            try
+            {
+                var collection = database.GetCollection<Abonne>("Abonnes");
+                collection.ReplaceOne((x => x.Id == abonne.Id), abonne);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible de modifier un abonne " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
         public void AddRecompense( Abonne abonne)
         {
             try
