@@ -33,6 +33,7 @@ namespace MonCine.Vues
         {
             InitializeComponent();
             _dal = dal;
+            
             ReadEntities();
             PopulateListViews();
             

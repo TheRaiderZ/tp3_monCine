@@ -24,10 +24,20 @@ namespace MonCine.Vues
 
         public List<Realisateur> Realisateurs = new List<Realisateur>();
         public List<Acteur> Acteurs = new List<Acteur>();
+        //public List<Film> FilmsVisionnés = new List<Film>();
+        public Film SelectedFilm { get; set; }
+        
         private DAL _dal;
         public Profil(DAL dal)
         {
+            
             InitializeComponent();
+            ratings1.StarSize = 20;
+            ratings1.Value = 0.5M;
+            //ratings1.NumberOfStars = 5;
+            ratings1.BackgroundColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF042A2B");
+            ratings1.StarForegroundColor = Brushes.Orange;
+            ratings1.StarOutlineColor = Brushes.DarkGray;            
             DataContext = this;
             _dal = dal;
             GetFirstAbonne();
@@ -41,7 +51,7 @@ namespace MonCine.Vues
             {
                 Abonne.Preferences = new Preferences();
             }
-            
+
         }
         private void PopulateListViews()
         {
@@ -51,6 +61,8 @@ namespace MonCine.Vues
             Acteurs = Acteurs.OrderBy(a => a.Nom).ToList();
             listeActeurs.ItemsSource = Acteurs;
             listeCategories.ItemsSource = Enum.GetValues(typeof(Categorie));
+            lstFilms.ItemsSource = Abonne.FilmVisionnés;
+
         }
 
         private void ReadEntities()
@@ -74,6 +86,7 @@ namespace MonCine.Vues
         public void EnregistrerChangements()
         {
             //TODO: Enregistrer les changements
+            
             _dal.UpdateAbonne(Abonne);
         }
 
@@ -124,6 +137,53 @@ namespace MonCine.Vues
             {
                 Abonne.Preferences.RealisateursFavoris = listeRealisateurs.SelectedItems.Cast<Realisateur>().ToList();
             }
+        }
+
+        private void sliderNote_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            txtCurrentNote.Content = sliderNote.Value.ToString();
+
+            if (ratings1 != null)
+            {
+                ratings1.Value = (decimal)sliderNote.Value/2;;
+
+            }
+
+        }
+
+        private void btnSaveNote_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedFilm!=null)
+            {
+                if (SelectedFilm.Notes==null)
+                {
+                    SelectedFilm.Notes = new List<int>();
+                }
+                SelectedFilm.Notes.Add((int)sliderNote.Value);
+                _dal.UpdateFilm(SelectedFilm);
+            }
+        }
+        //Barre de recherche
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            lstFilms.SelectedItem = null;
+            SelectedFilm = null;
+            if (String.IsNullOrWhiteSpace(txtRecherche.Text))
+            {
+                lstFilms.ItemsSource = Abonne.FilmVisionnés;
+                return;
+            }
+            List<Film> resultat = new List<Film>();
+            resultat = FiltrerFilmsParNom(Abonne.FilmVisionnés, txtRecherche.Text);
+            lstFilms.ItemsSource = resultat;
+
+        }
+        public static List<Film> FiltrerFilmsParNom(List<Film> films, string filtre)
+        {
+            List<Film> resultat = new List<Film>();
+
+            resultat = films.Where(x => x.NomCorrespondFiltre(filtre)).ToList();
+            return resultat;
         }
     }
 }

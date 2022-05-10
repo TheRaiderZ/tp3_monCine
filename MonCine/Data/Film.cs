@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 
@@ -17,6 +18,30 @@ namespace MonCine.Data
         public IEnumerable<Categorie> Categories { get; set; }
         public List<int> Notes { get; set; }
         public int NbProjections { get; set; }
+
+        public double NoteMoyenne
+        {
+            get
+            {
+                if (Notes==null||Notes.Count == 0)
+                    return 0;
+                else
+
+                    return Math.Round(Notes.Average(),1);
+            }
+        }
+
+        public double ValeurSur5
+        {
+            get
+            {
+                if (Notes == null || Notes.Count == 0)
+                    return 0;
+                else
+
+                    return Math.Round(Notes.Average()/2, 1);
+            }
+        }
 
         public string CategorieToString => CategoryToString();
 
@@ -41,6 +66,7 @@ namespace MonCine.Data
         {
             Nom = nom;
             DateSortie = dateSortie;
+            Notes = new List<int>();
         }
 
 
