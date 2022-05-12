@@ -24,4 +24,17 @@
     <Resource Include="Vues\Logo.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Vues\Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Vues\Login.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>
