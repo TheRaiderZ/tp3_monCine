@@ -26,7 +26,7 @@
                                       StarForegroundColor="Orange"
                                       StarSize="10"
                                       StarOutlineColor="DarkGray"
-                                    Value="{Binding NoteSur5}" NumberOfStars="5" Minimum="0" HorizontalAlignment="Left" Margin="308,18,0,0" VerticalAlignment="Top" Width="47"/>
+                                    Value="{Binding ValeurSur5}" NumberOfStars="5" Minimum="0" HorizontalAlignment="Left" Margin="308,18,0,0" VerticalAlignment="Top" Width="47"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>

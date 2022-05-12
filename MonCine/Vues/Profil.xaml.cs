@@ -26,25 +26,25 @@ namespace MonCine.Vues
         public List<Acteur> Acteurs = new List<Acteur>();
         //public List<Film> FilmsVisionnés = new List<Film>();
         public Film SelectedFilm { get; set; }
-        
+
         private DAL _dal;
         public Profil(DAL dal)
         {
-            
+
             InitializeComponent();
             ratings1.StarSize = 20;
             ratings1.Value = 0.5M;
             //ratings1.NumberOfStars = 5;
             ratings1.BackgroundColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF042A2B");
             ratings1.StarForegroundColor = Brushes.Orange;
-            ratings1.StarOutlineColor = Brushes.DarkGray;            
+            ratings1.StarOutlineColor = Brushes.DarkGray;
             DataContext = this;
             _dal = dal;
             GetFirstAbonne();
             ReadEntities();
             PopulateListViews();
         }
-        private void GetFirstAbonne() 
+        private void GetFirstAbonne()
         {
             Abonne = _dal.ReadAbonnes().FirstOrDefault();
             if (Abonne.Preferences == null)
@@ -53,6 +53,20 @@ namespace MonCine.Vues
             }
 
         }
+
+        private List<Film> GetFilmsVisionnes()
+        {
+            List<Film> filmsVisionnes = new List<Film>();
+            foreach (var film in Abonne.FilmVisionnés)
+            {
+                if (film.DateProjection<DateTime.Now)
+                {
+                    filmsVisionnes.Add(film);
+                }
+            }
+            return filmsVisionnes;
+        }
+        
         private void PopulateListViews()
         {
             //listeFilms.ItemsSource = Films; listeFilms.DataContext = Films;
@@ -61,7 +75,7 @@ namespace MonCine.Vues
             Acteurs = Acteurs.OrderBy(a => a.Nom).ToList();
             listeActeurs.ItemsSource = Acteurs;
             listeCategories.ItemsSource = Enum.GetValues(typeof(Categorie));
-            lstFilms.ItemsSource = Abonne.FilmVisionnés;
+            lstFilms.ItemsSource = GetFilmsVisionnes();
 
         }
 
