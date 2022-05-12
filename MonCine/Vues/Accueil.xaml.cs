@@ -36,9 +36,12 @@ namespace MonCine.Vues
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            FProjections frmProjections = new FProjections(dal);
-            
-            this.NavigationService.Navigate(frmProjections);
+            //FProjections frmProjections = new FProjections(dal);
+            //
+            //this.NavigationService.Navigate(frmProjections);
+
+            FReservation frmReservation = new FReservation(dal);
+            this.NavigationService.Navigate(frmReservation);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -46,13 +49,6 @@ namespace MonCine.Vues
             FFilms frmFilms = new FFilms(dal);
 
             this.NavigationService.Navigate(frmFilms);
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            Profil profil = new Profil(dal);
-
-            profil.ShowDialog();
         }
     }
 }

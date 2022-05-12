@@ -441,6 +441,53 @@ namespace MonCine.Data
         }
 
         
+
+        #endregion
+
+        #region CRUD Reservation
+        public List<Reservation> ReadReservation()
+        {
+            var reservations = new List<Reservation>();
+
+            try
+            {
+                var collection = database.GetCollection<Reservation>("Reservations");
+                if (collection != null)
+                {
+                    reservations = collection.FindSync(Builders<Reservation>.Filter.Empty).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'obtenir la collection " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return reservations;
+        }
+
+        public void AddReservation(Reservation reservation)
+        {
+
+
+            try
+            {
+                var collection = database.GetCollection<Reservation>("Reservations");
+                collection.InsertOne(reservation);
+
+                Projection projection = reservation.Projection;
+                projection.NbPlaces = projection.NbPlaces - reservation.NbPlaces;
+
+                var collectionProj = database.GetCollection<Projection>("Projections");
+                collectionProj.ReplaceOne((x => x.Id == projection.Id), projection);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'ajouter une réservation " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
+
         #endregion
     }
 }
