@@ -20,6 +20,7 @@ namespace MonCine.Vues
     public partial class Accueil : Page
     {
         private DAL dal;
+        
         public Accueil()
         {
             InitializeComponent();

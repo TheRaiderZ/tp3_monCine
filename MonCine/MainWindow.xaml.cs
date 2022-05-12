@@ -24,7 +24,8 @@ namespace MonCine
         public MainWindow()
         {
             InitializeComponent();
-            _NavigationFrame.Navigate(new Accueil());
+            //_NavigationFrame.Navigate(new Accueil());
+            _NavigationFrame.Navigate(new Login());
         }
     }
 }

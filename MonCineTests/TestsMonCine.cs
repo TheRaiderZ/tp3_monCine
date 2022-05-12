@@ -5,11 +5,12 @@ using MongoDB.Driver;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace MonCineTests
 {
-    
+
     [TestClass]
     public class DALtest
     {
@@ -177,7 +178,7 @@ namespace MonCineTests
             Assert.IsNotNull(realisateurs);
 
         }
-        
+
         [TestMethod]
         public void ModifyRealisateurTest()
         {
@@ -191,13 +192,13 @@ namespace MonCineTests
 
             Assert.AreEqual(55, actualRealisateur.Age);
         }
-        
+
         [TestMethod]
         public void RemoveRealisateurTest()
         {
             DAL dal = new DAL();
             //Film film = new Film("Film TestUnitaire", DateTime.UtcNow);
-            Realisateur realisateur = dal.ReadRealisateurs().Find(x=>x.Nom==realisateurTestUnitaire.Nom);
+            Realisateur realisateur = dal.ReadRealisateurs().Find(x => x.Nom == realisateurTestUnitaire.Nom);
             dal.RemoveRealisateur(realisateur);
             var realisateurs = dal.ReadRealisateurs();
             var result = realisateurs.Find(x => x.Id == realisateur.Id);
@@ -410,7 +411,7 @@ namespace MonCineTests
             filmTestUnitaire.SurAffiche = true;
             dal.AddFilm(filmTestUnitaire);
             var films = dal.ReadFilms();
-            var result = films.Find(x=>x.Nom==filmTestUnitaire.Nom);
+            var result = films.Find(x => x.Nom == filmTestUnitaire.Nom);
             Assert.IsNotNull(result);
         }
 
@@ -490,9 +491,182 @@ namespace MonCineTests
             List<Film> resultat = FFilms.FiltrerFilmsParNom(mockListefilms, "film");
 
             CollectionAssert.AreEquivalent(resultatAttendu, resultat);
-            
+
 
         }
 
+        [TestMethod]
+        public void AjouterNotes()
+        {
+            DAL dal = new DAL();
+            var foundfilm = dal.FindFilmByName(filmTestUnitaire.Nom);
+            foundfilm.Notes = new List<int>() { 10 };
+            foundfilm.Notes.Add(10);
+            dal.UpdateFilm(foundfilm);
+            var actualFilm = dal.FindFilmByName(filmTestUnitaire.Nom);
+            Assert.AreEqual(10, actualFilm.Notes.First());
+        }
+        [TestMethod]
+        public void GetNoteSur5()
+        {
+            DAL dal = new DAL();
+            var foundfilm = dal.FindFilmByName(filmTestUnitaire.Nom);
+            List<int> notes = new List<int>() { 10, 5, 9 };
+            foundfilm.Notes = notes;
+            dal.UpdateFilm(foundfilm);
+            double moyenneNotes = notes.Average();
+            double noteSur5 = (moyenneNotes * 5) / 10;
+            var actualFilm = dal.FindFilmByName(filmTestUnitaire.Nom);
+            Assert.AreEqual(noteSur5, actualFilm.ValeurSur5);
+        }
+
+    }
+
+    [TestClass]
+    public class AbonnesTests
+    {
+        private Mock<IMongoClient> mongoClient;
+        private Mock<IMongoDatabase> mongodb;
+        private Mock<IMongoCollection<Abonne>> abonneCollection;
+        private List<Abonne> abonneList;
+        private Mock<IAsyncCursor<Abonne>> abonneCursor;
+
+        public AbonnesTests()
+        {
+            this.mongoClient = new Mock<IMongoClient>();
+            this.mongodb = new Mock<IMongoDatabase>();
+
+            this.abonneCollection = new Mock<IMongoCollection<Abonne>>();
+            this.abonneCursor = new Mock<IAsyncCursor<Abonne>>();
+
+
+            this.abonneList = new List<Abonne>() {
+                new Abonne("Abonne1", "TestUnitaire", 1, "aboTest1"),
+                new Abonne("Abonne2", "TestUnitaire", 1, "aboTest2")
+            };
+        }
+
+        private void InitializeMongoDb()
+        {
+            this.mongodb.Setup(x => x.GetCollection<Abonne>("Abonnes", default)).Returns(this.abonneCollection.Object);
+
+            this.mongoClient.Setup(x => x.GetDatabase(It.IsAny<string>(), default)).Returns(this.mongodb.Object);
+        }
+
+        private void InitializeMongoAbonnesCollection()
+        {
+            this.abonneCursor.Setup(x => x.Current).Returns(this.abonneList);
+
+            this.abonneCursor.SetupSequence(x => x.MoveNext(It.IsAny<CancellationToken>())).Returns(true).Returns(false);
+
+
+            this.abonneCollection
+                .Setup(
+                    x => x.FindSync(Builders<Abonne>.Filter.Empty, It.IsAny<FindOptions<Abonne>>(), default))
+                .Returns(abonneCursor.Object);
+
+
+
+            this.InitializeMongoDb();
+        }
+
+        [TestMethod]
+        public void ReadAbonneTest()
+        {
+            // Création des faux objets
+            this.InitializeMongoAbonnesCollection();
+
+            var dal = new DAL(mongoClient.Object);
+
+            // Act : appel de la méthode qui contient le faux objet
+            var documents = dal.ReadAbonnes();
+
+            // Assert
+            CollectionAssert.AreEqual(abonneList, documents);
+
+        }
+
+
+        Abonne abonneTestUnitaire = new Abonne("Abonne", "TestUnitaire", 1, "abo1");
+        Abonne adminTestUnitaire = new Abonne("Admin", "TestUnitaire", 1, "admin1", true);
+
+        [TestMethod]
+        public void AjouterAbonneTest()
+        {
+            DAL dal = new DAL();
+
+            dal.AddAbonne(abonneTestUnitaire);
+            var abonnes = dal.ReadAbonnes();
+            var result = abonnes.Find(x => x.Username == abonneTestUnitaire.Username);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void AjouterAdminTest()
+        {
+            DAL dal = new DAL();
+
+            dal.AddAbonne(adminTestUnitaire);
+            var abonnes = dal.ReadAbonnes();
+            var result = abonnes.Find(x => x.Username == adminTestUnitaire.Username);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void ReadAbonnesNonNullTest()
+        {
+            DAL dal = new DAL();
+            List<Abonne> abonnes = new List<Abonne>();
+
+            abonnes = dal.ReadAbonnes();
+
+            Assert.IsNotNull(abonnes);
+
+        }
+        [TestMethod]
+        public void FindAbonneParNomTest()
+        {
+            DAL dal = new DAL();
+
+            Abonne result = dal.FindAbonneByUserName(abonneTestUnitaire.Username);
+
+            Assert.IsNotNull(result);
+
+        }
+        [TestMethod]
+        public void ModifyAbonneTest()
+        {
+            DAL dal = new DAL();
+            var foundabonne = dal.FindAbonneByUserName(abonneTestUnitaire.Username);
+            foundabonne.Age = 4;
+            dal.UpdateAbonne(foundabonne);
+            var actualAbonne = dal.FindAbonneByUserName(abonneTestUnitaire.Username);
+
+            Assert.AreEqual(4, actualAbonne.Age);
+        }
+        [TestMethod]
+        public void RemoveAbonneTest()
+        {
+            DAL dal = new DAL();
+            Abonne abonne = dal.FindAbonneByUserName(abonneTestUnitaire.Username);
+            dal.RemoveAbonne(abonne);
+            var abonnes = dal.ReadAbonnes();
+            var result = abonnes.Find(x => x.Id == abonne.Id);
+            Assert.IsNull(result);
+        }
+        
+        [TestMethod]
+        public void GetAdminsTest()
+        {
+            DAL dal = new DAL();
+            List<Abonne> admins = new List<Abonne>();
+            admins = dal.GetAdmins();
+            Assert.IsNotNull(admins);
+
+            //Removing the admin after the test
+            Abonne admin = dal.FindAbonneByUserName(adminTestUnitaire.Username);
+            dal.RemoveAbonne(admin);
+
+        }
     }
 }
