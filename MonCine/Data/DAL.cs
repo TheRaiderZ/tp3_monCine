@@ -394,6 +394,12 @@ namespace MonCine.Data
             {
                 var collection = database.GetCollection<Reservation>("Reservations");
                 collection.InsertOne(reservation);
+
+                Projection projection = reservation.Projection;
+                projection.NbPlaces = projection.NbPlaces - reservation.NbPlaces;
+
+                var collectionProj = database.GetCollection<Projection>("Projections");
+                collectionProj.ReplaceOne((x => x.Id == projection.Id), projection);
             }
             catch (Exception ex)
             {

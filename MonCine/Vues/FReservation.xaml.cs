@@ -55,7 +55,7 @@ namespace MonCine.Vues
 
         private void Enregistrer()
         {
-            int places = 1;
+            int places = Convert.ToInt32(tbxNbReservations.Text);
 
             if (SelectedProjection.NbPlaces < places)
             {
@@ -63,7 +63,7 @@ namespace MonCine.Vues
             }
             else
             {
-                Reservation reservation = new Reservation(DateTime.Now, null, 1, SelectedProjection);
+                Reservation reservation = new Reservation(DateTime.Now, null, places, SelectedProjection);
                 _dal.AddReservation(reservation);
             }
         }
