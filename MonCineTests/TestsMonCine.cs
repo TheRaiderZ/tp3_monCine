@@ -68,12 +68,12 @@ namespace MonCineTests
         [TestMethod]
         public void ReadAliments_moqFindSyncCall()
         {
-            // Création des faux objets
+            // Crï¿½ation des faux objets
             this.InitializeMongoFilmsCollection();
 
             var dal = new DAL(mongoClient.Object);
 
-            // Act : appel de la méthode qui contient le faux objet
+            // Act : appel de la mï¿½thode qui contient le faux objet
             var documents = dal.ReadFilms();
 
             // Assert
@@ -141,12 +141,12 @@ namespace MonCineTests
         [TestMethod]
         public void ReadRealisateurTest()
         {
-            // Création des faux objets
+            // Crï¿½ation des faux objets
             this.InitializeMongoRealisateursCollection();
 
             var dal = new DAL(mongoClient.Object);
 
-            // Act : appel de la méthode qui contient le faux objet
+            // Act : appel de la mï¿½thode qui contient le faux objet
             var documents = dal.ReadRealisateurs();
 
             // Assert
@@ -264,12 +264,12 @@ namespace MonCineTests
         [TestMethod]
         public void ReadActeurTest()
         {
-            // Création des faux objets
+            // Crï¿½ation des faux objets
             this.InitializeMongoActeursCollection();
 
             var dal = new DAL(mongoClient.Object);
 
-            // Act : appel de la méthode qui contient le faux objet
+            // Act : appel de la mï¿½thode qui contient le faux objet
             var documents = dal.ReadActeurs();
 
             // Assert
@@ -387,12 +387,12 @@ namespace MonCineTests
         [TestMethod]
         public void ReadFilmTest()
         {
-            // Création des faux objets
+            // Crï¿½ation des faux objets
             this.InitializeMongoFilmsCollection();
 
             var dal = new DAL(mongoClient.Object);
 
-            // Act : appel de la méthode qui contient le faux objet
+            // Act : appel de la mï¿½thode qui contient le faux objet
             var documents = dal.ReadFilms();
 
             // Assert
@@ -581,12 +581,12 @@ namespace MonCineTests
         [TestMethod]
         public void ReadAbonneTest()
         {
-            // Création des faux objets
+            // Crï¿½ation des faux objets
             this.InitializeMongoAbonnesCollection();
 
             var dal = new DAL(mongoClient.Object);
 
-            // Act : appel de la méthode qui contient le faux objet
+            // Act : appel de la mï¿½thode qui contient le faux objet
             var documents = dal.ReadAbonnes();
 
             // Assert
@@ -608,6 +608,7 @@ namespace MonCineTests
             var result = abonnes.Find(x => x.Username == abonneTestUnitaire.Username);
             Assert.IsNotNull(result);
         }
+
 
         [TestMethod]
         public void AjouterAdminTest()
