@@ -44,6 +44,7 @@ namespace MonCine.Data
             return db;
         }
 
+
         #region CRUD Abonne
         public List<Abonne> ReadAbonnes()
         {
@@ -91,6 +92,20 @@ namespace MonCine.Data
 
             }
         }
+        
+        public void RemoveAbonne(Abonne abonne)
+        {
+            try
+            {
+                var collection = database.GetCollection<Abonne>("Abonnes");
+                collection.DeleteOne((x => x.Id == abonne.Id));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible de supprimer un abonne " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
 
         public void AddRecompense( Abonne abonne)
         {
@@ -104,6 +119,39 @@ namespace MonCine.Data
 
                 MessageBox.Show("Impossible d'ajouter la récompense. " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        public Abonne FindAbonneByUserName(string username)
+        {
+            try
+            {
+                var collection = database.GetCollection<Abonne>("Abonnes");
+                var film = collection.Find(x => x.Username == username).First();
+                return film;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'obtenir la collection " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return null;
+        }
+
+        public List<Abonne> GetAdmins()
+        {
+            try
+            {
+                List<Abonne> admins = new List<Abonne>();
+                var collection = database.GetCollection<Abonne>("Abonnes");
+                admins = collection.Find(x => x.isAdmin).ToList();
+                return admins;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'obtenir la collection " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return null;
         }
         #endregion
 
@@ -391,6 +439,8 @@ namespace MonCine.Data
 
             }
         }
+
+        
         #endregion
     }
 }

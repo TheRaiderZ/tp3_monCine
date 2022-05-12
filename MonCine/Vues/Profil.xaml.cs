@@ -40,13 +40,18 @@ namespace MonCine.Vues
             ratings1.StarOutlineColor = Brushes.DarkGray;
             DataContext = this;
             _dal = dal;
-            GetFirstAbonne();
+            GetUser();
             ReadEntities();
             PopulateListViews();
         }
-        private void GetFirstAbonne()
+        private void GetUser()
         {
-            Abonne = _dal.ReadAbonnes().FirstOrDefault();
+            Abonne = App.Current.Properties["CurrentUser"] as Abonne;
+            if (Abonne == null)
+            {
+                MessageBox.Show("Veuillez vous connecter");
+                this.Close();
+            }
             if (Abonne.Preferences == null)
             {
                 Abonne.Preferences = new Preferences();

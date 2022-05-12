@@ -18,6 +18,7 @@ namespace MonCine.Data
             Prenom = prenom;
             Nom = nom;
             Age = age;
+
         }
 
         public override string ToString()
