@@ -64,34 +64,6 @@ namespace MonCine.Data
             }
             return abonnes;
         }
-        public void AddAbonne(Abonne abonne)
-        {
-            try
-            {
-                var collection = database.GetCollection<Abonne>("Abonnes");
-                collection.InsertOne(abonne);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Impossible d'ajouter un abonne " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-        }
-
-        public void UpdateAbonne(Abonne abonne)
-        {
-            try
-            {
-                var collection = database.GetCollection<Abonne>("Abonnes");
-                collection.ReplaceOne((x => x.Id == abonne.Id), abonne);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Impossible de modifier un abonne " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-        }
-
         public void AddRecompense( Abonne abonne)
         {
             try
@@ -391,6 +363,46 @@ namespace MonCine.Data
 
             }
         }
+        #endregion
+
+        #region CRUD Reservation
+        public List<Reservation> ReadReservation()
+        {
+            var reservations = new List<Reservation>();
+
+            try
+            {
+                var collection = database.GetCollection<Reservation>("Reservations");
+                if (collection != null)
+                {
+                    reservations = collection.FindSync(Builders<Reservation>.Filter.Empty).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'obtenir la collection " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return reservations;
+        }
+
+        public void AddReservation(Reservation reservation)
+        {
+
+
+            try
+            {
+                var collection = database.GetCollection<Reservation>("Reservations");
+                collection.InsertOne(reservation);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'ajouter une réservation " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
+
         #endregion
     }
 }

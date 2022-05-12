@@ -33,7 +33,6 @@ namespace MonCine.Vues
         {
             InitializeComponent();
             _dal = dal;
-            
             ReadEntities();
             PopulateListViews();
             
@@ -42,8 +41,8 @@ namespace MonCine.Vues
         private void PopulateListViews()
         {
             listeFilms.ItemsSource = Films; listeFilms.DataContext = Films;
-            listeRealisateurs.ItemsSource = Realisateurs;
-            listeActeurs.ItemsSource = Acteurs;
+            listeRealisateurs.ItemsSource = Realisateurs; listeRealisateurs.DataContext = Realisateurs;
+            listeActeurs.ItemsSource = Acteurs; listeRealisateurs.DataContext = Acteurs;
             listeCategories.ItemsSource = Enum.GetValues(typeof(Categorie));
         }
 
