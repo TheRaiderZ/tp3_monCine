@@ -61,7 +61,7 @@ namespace MonCine.Vues
                 Film film = (Film)listeFilms.SelectedItem;
                 DateTime debut = (DateTime)dtpDateDebut.SelectedDate;
                 DateTime fin = (DateTime)dtpDateFin.SelectedDate;
-                Projection projection = new Projection((Salle)listeSalle.SelectedItem,debut,fin,film);
+                Projection projection = new Projection((Salle)listeSalle.SelectedItem,debut,fin,film, 100);
                 _dal.AddProjection(projection);
                 this.NavigationService.GoBack();
             }

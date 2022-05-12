@@ -13,13 +13,15 @@ namespace MonCine.Data
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
         public Film Film { get; set; }
+        public int NbPlaces { get; set; }
 
-        public Projection(Salle salle, DateTime dateDebut, DateTime dateFin, Film film)
+        public Projection(Salle salle, DateTime dateDebut, DateTime dateFin, Film film, int nbPlaces)
         {
             this.Salle = salle;
             this.DateDebut = dateDebut;
             this.DateFin = dateFin;
             this.Film = film;
+            this.NbPlaces = nbPlaces;
         }
 
         public override string ToString()
