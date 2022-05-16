@@ -51,7 +51,13 @@ namespace MonCine.Vues
             this.NavigationService.Navigate(frmFilms);
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        //private void Button_Click_3(object sender, RoutedEventArgs e)
+        //{
+        //    Profil profil = new Profil(dal);
+        //    profil.ShowDialog();
+        //}
+
+        private void btnProfil_Click(object sender, RoutedEventArgs e)
         {
             Profil profil = new Profil(dal);
             profil.ShowDialog();
