@@ -126,8 +126,8 @@ namespace MonCine.Data
             try
             {
                 var collection = database.GetCollection<Abonne>("Abonnes");
-                var film = collection.Find(x => x.Username == username).First();
-                return film;
+                var abonne = collection.Find(x => x.Username == username).FirstOrDefault();
+                return abonne;
             }
             catch (Exception ex)
             {
@@ -234,7 +234,7 @@ namespace MonCine.Data
             try
             {
                 var collection = database.GetCollection<Film>("Films");
-                var film = collection.Find(x=>x.Nom==nom).First();
+                var film = collection.Find(x=>x.Nom==nom).FirstOrDefault();
                 return film;
             }
             catch (Exception ex)
@@ -299,7 +299,7 @@ namespace MonCine.Data
             try
             {
                 var collection = database.GetCollection<Film>("Films");
-                films = collection.Find(x=>x.SurAffiche==true).ToList();
+                films = collection.Find(x=>x.SurAffiche==true).ToList();    
             }
             catch (Exception ex)
             {
