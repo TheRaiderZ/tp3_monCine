@@ -1,238 +1,19 @@
 [{
   "_id": {
-    "$oid": "6265e1eabe5c1ca4d17e3506"
+    "$oid": "627155b99c4213408716c8da"
   },
-  "salle": 0,
-  "dateDebut": {
+  "Salle": 2,
+  "DateDebut": {
     "$date": {
-      "$numberLong": "1649217600000"
+      "$numberLong": "1652846400000"
     }
   },
-  "dateFin": {
+  "DateFin": {
     "$date": {
-      "$numberLong": "1651204800000"
+      "$numberLong": "1653710400000"
     }
   },
-  "film": {
-    "_id": {
-      "$oid": "6255b392c1483b421a981340"
-    },
-    "Nom": "Film Test1",
-    "DateSortie": {
-      "$date": {
-        "$numberLong": "1649783698485"
-      }
-    },
-    "DateProjection": {
-      "$date": {
-        "$numberLong": "-62135596800000"
-      }
-    },
-    "SurAffiche": true,
-    "Acteurs": [
-      {
-        "Prenom": "Acteur",
-        "Nom": "1",
-        "Age": 12,
-        "_id": {
-          "$oid": "62617f2b90ce04064e4944ec"
-        }
-      },
-      {
-        "Prenom": "Acteur",
-        "Nom": "3",
-        "Age": 47,
-        "_id": {
-          "$oid": "6262e6be55a6a85d7dab19fe"
-        }
-      },
-      {
-        "Prenom": "Acteur",
-        "Nom": "5",
-        "Age": 64,
-        "_id": {
-          "$oid": "6262e6be55a6a85d7dab1a00"
-        }
-      }
-    ],
-    "Realisateur": {
-      "Prenom": "Bob",
-      "Nom": "PierreTest",
-      "Age": 43,
-      "_id": {
-        "$oid": "626178314c1ee6c7b08a3927"
-      }
-    },
-    "Categories": [
-      1,
-      3,
-      5
-    ],
-    "Notes": null,
-    "NbProjections": 0
-  }
-},{
-  "_id": {
-    "$oid": "6265e2a1be5c1ca4d17e358b"
-  },
-  "salle": 4,
-  "dateDebut": {
-    "$date": {
-      "$numberLong": "1649131200000"
-    }
-  },
-  "dateFin": {
-    "$date": {
-      "$numberLong": "1651291200000"
-    }
-  },
-  "film": {
-    "_id": {
-      "$oid": "6255b392c1483b421a981340"
-    },
-    "Nom": "Film Test1",
-    "DateSortie": {
-      "$date": {
-        "$numberLong": "1649783698485"
-      }
-    },
-    "DateProjection": {
-      "$date": {
-        "$numberLong": "-62135596800000"
-      }
-    },
-    "SurAffiche": true,
-    "Acteurs": [
-      {
-        "Prenom": "Acteur",
-        "Nom": "1",
-        "Age": 12,
-        "_id": {
-          "$oid": "62617f2b90ce04064e4944ec"
-        }
-      },
-      {
-        "Prenom": "Acteur",
-        "Nom": "3",
-        "Age": 47,
-        "_id": {
-          "$oid": "6262e6be55a6a85d7dab19fe"
-        }
-      },
-      {
-        "Prenom": "Acteur",
-        "Nom": "5",
-        "Age": 64,
-        "_id": {
-          "$oid": "6262e6be55a6a85d7dab1a00"
-        }
-      }
-    ],
-    "Realisateur": {
-      "Prenom": "Bob",
-      "Nom": "PierreTest",
-      "Age": 43,
-      "_id": {
-        "$oid": "626178314c1ee6c7b08a3927"
-      }
-    },
-    "Categories": [
-      1,
-      3,
-      5
-    ],
-    "Notes": null,
-    "NbProjections": 0
-  }
-},{
-  "_id": {
-    "$oid": "62660a146f637c3bdbf56684"
-  },
-  "salle": 3,
-  "dateDebut": {
-    "$date": {
-      "$numberLong": "1649736000000"
-    }
-  },
-  "dateFin": {
-    "$date": {
-      "$numberLong": "1650859200000"
-    }
-  },
-  "film": {
-    "_id": {
-      "$oid": "6255b392c1483b421a981340"
-    },
-    "Nom": "Film Test1",
-    "DateSortie": {
-      "$date": {
-        "$numberLong": "1649783698485"
-      }
-    },
-    "DateProjection": {
-      "$date": {
-        "$numberLong": "-62135596800000"
-      }
-    },
-    "SurAffiche": true,
-    "Acteurs": [
-      {
-        "Prenom": "Acteur",
-        "Nom": "1",
-        "Age": 12,
-        "_id": {
-          "$oid": "62617f2b90ce04064e4944ec"
-        }
-      },
-      {
-        "Prenom": "Acteur",
-        "Nom": "3",
-        "Age": 47,
-        "_id": {
-          "$oid": "6262e6be55a6a85d7dab19fe"
-        }
-      },
-      {
-        "Prenom": "Acteur",
-        "Nom": "5",
-        "Age": 64,
-        "_id": {
-          "$oid": "6262e6be55a6a85d7dab1a00"
-        }
-      }
-    ],
-    "Realisateur": {
-      "Prenom": "Bob",
-      "Nom": "PierreTest",
-      "Age": 43,
-      "_id": {
-        "$oid": "626178314c1ee6c7b08a3927"
-      }
-    },
-    "Categories": [
-      1,
-      3,
-      5
-    ],
-    "Notes": null,
-    "NbProjections": 0
-  }
-},{
-  "_id": {
-    "$oid": "62660cd49574d729f7283e8d"
-  },
-  "salle": 2,
-  "dateDebut": {
-    "$date": {
-      "$numberLong": "1648785600000"
-    }
-  },
-  "dateFin": {
-    "$date": {
-      "$numberLong": "1648872000000"
-    }
-  },
-  "film": {
+  "Film": {
     "_id": {
       "$oid": "6255b3b4f651373e656f071e"
     },
@@ -274,6 +55,106 @@
       6
     ],
     "Notes": null,
-    "NbProjections": 0
-  }
+    "NbProjections": 1223
+  },
+  "NbPlaces": 802
+},{
+  "_id": {
+    "$oid": "6283d88b4c27a41a4d7fc094"
+  },
+  "Salle": 0,
+  "DateDebut": {
+    "$date": {
+      "$numberLong": "1651377600000"
+    }
+  },
+  "DateFin": {
+    "$date": {
+      "$numberLong": "1653883200000"
+    }
+  },
+  "Film": {
+    "_id": {
+      "$oid": "6255b392c1483b421a981340"
+    },
+    "Nom": "Film T55545",
+    "DateSortie": {
+      "$date": {
+        "$numberLong": "1649783698485"
+      }
+    },
+    "DateProjection": {
+      "$date": {
+        "$numberLong": "1577836800000"
+      }
+    },
+    "SurAffiche": true,
+    "Acteurs": [
+      {
+        "Prenom": "Acteur",
+        "Nom": "1",
+        "Age": 12,
+        "_id": {
+          "$oid": "62617f2b90ce04064e4944ec"
+        }
+      },
+      {
+        "Prenom": "Acteur",
+        "Nom": "3",
+        "Age": 47,
+        "_id": {
+          "$oid": "6262e6be55a6a85d7dab19fe"
+        }
+      },
+      {
+        "Prenom": "Acteur",
+        "Nom": "2",
+        "Age": 58,
+        "_id": {
+          "$oid": "6262e6be55a6a85d7dab19fd"
+        }
+      },
+      {
+        "Prenom": "Acteur",
+        "Nom": "6",
+        "Age": 64,
+        "_id": {
+          "$oid": "6273e19cdec169e2b247ecdf"
+        }
+      }
+    ],
+    "Realisateur": {
+      "Prenom": "Paul",
+      "Nom": "Test2",
+      "Age": 535,
+      "_id": {
+        "$oid": "625f1967a129b705eb500154"
+      }
+    },
+    "Categories": [
+      1,
+      3,
+      5,
+      0
+    ],
+    "Notes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "NbProjections": 4
+  },
+  "NbPlaces": 99
 }]

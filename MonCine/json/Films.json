@@ -2,7 +2,7 @@
   "_id": {
     "$oid": "6255b392c1483b421a981340"
   },
-  "Nom": "Film Test1",
+  "Nom": "Film T55545",
   "DateSortie": {
     "$date": {
       "$numberLong": "1649783698485"
@@ -10,7 +10,7 @@
   },
   "DateProjection": {
     "$date": {
-      "$numberLong": "-62135596800000"
+      "$numberLong": "1577836800000"
     }
   },
   "SurAffiche": true,
@@ -33,28 +33,54 @@
     },
     {
       "Prenom": "Acteur",
-      "Nom": "5",
+      "Nom": "2",
+      "Age": 58,
+      "_id": {
+        "$oid": "6262e6be55a6a85d7dab19fd"
+      }
+    },
+    {
+      "Prenom": "Acteur",
+      "Nom": "6",
       "Age": 64,
       "_id": {
-        "$oid": "6262e6be55a6a85d7dab1a00"
+        "$oid": "6273e19cdec169e2b247ecdf"
       }
     }
   ],
   "Realisateur": {
-    "Prenom": "Bob",
-    "Nom": "PierreTest",
-    "Age": 43,
+    "Prenom": "Paul",
+    "Nom": "Test2",
+    "Age": 535,
     "_id": {
-      "$oid": "626178314c1ee6c7b08a3927"
+      "$oid": "625f1967a129b705eb500154"
     }
   },
   "Categories": [
     1,
     3,
-    5
+    5,
+    0
   ],
-  "Notes": null,
-  "NbProjections": 0
+  "Notes": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    8
+  ],
+  "NbProjections": 4
 },{
   "_id": {
     "$oid": "6255b3b4f651373e656f071e"
@@ -96,13 +122,49 @@
     2,
     6
   ],
-  "Notes": null,
-  "NbProjections": 0
+  "Notes": [
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "NbProjections": 1223
 },{
   "_id": {
     "$oid": "62656bf4f6779d3f44b4b851"
   },
-  "Nom": "Film Test 2",
+  "Nom": "Film Test 23",
   "DateSortie": {
     "$date": {
       "$numberLong": "1655054098485"
@@ -139,8 +201,19 @@
     2,
     6
   ],
-  "Notes": null,
-  "NbProjections": 0
+  "Notes": [
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    7,
+    7,
+    7,
+    7
+  ],
+  "NbProjections": 1
 },{
   "_id": {
     "$oid": "62656c0af6779d3f44b4b852"
@@ -165,6 +238,22 @@
       "_id": {
         "$oid": "62617f2b90ce04064e4944ec"
       }
+    },
+    {
+      "Prenom": "Acteur",
+      "Nom": "2",
+      "Age": 58,
+      "_id": {
+        "$oid": "6262e6be55a6a85d7dab19fd"
+      }
+    },
+    {
+      "Prenom": "Acteur",
+      "Nom": "5",
+      "Age": 64,
+      "_id": {
+        "$oid": "6262e6be55a6a85d7dab1a00"
+      }
     }
   ],
   "Realisateur": {
@@ -183,5 +272,5 @@
     6
   ],
   "Notes": null,
-  "NbProjections": 0
+  "NbProjections": 122
 }]
