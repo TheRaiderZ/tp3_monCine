@@ -120,7 +120,7 @@
                                 <Label x:Name="txtCurrentNote" Content="1" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="White" Grid.Row="2"/>
                                 <Slider x:Name="sliderNote" HorizontalAlignment="Center" Margin="0,39,0,0" Grid.Row="2" VerticalAlignment="Top" Width="172" Minimum="1" Value="1" Orientation="Horizontal" ValueChanged="sliderNote_ValueChanged" SmallChange="1" IsSnapToTickEnabled="True"/>
 
-                                <local:RatingsControl x:Name="ratings1"
+                                <local:RatingsControl x:Name="ratings"
                                     Value="0.5" Grid.Row="1" Minimum="0" Margin="0,63,0,10" HorizontalAlignment="Center" Width="264"/>
 
                             </Grid>

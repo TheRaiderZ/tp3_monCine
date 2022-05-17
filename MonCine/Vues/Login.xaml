@@ -47,7 +47,7 @@
             </Border.Background>
         </Border>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,45,0,45" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,45,0,45" VerticalAlignment="Center" HorizontalAlignment="Center">
             <ComboBox Grid.Column="0" Grid.Row="0"  x:Name="listeComptes" Height="27" d:ItemsSource="{d:SampleData ItemCount=5}"  Margin="150,25,150,25" HorizontalAlignment="Stretch" SelectionChanged="listeComptes_SelectionChanged" VerticalAlignment="Center"/>
             <Button x:Name="btnLogin" Content="Se connecter" Grid.Column="0" Grid.Row="0" Background="#FF220C0C" Foreground="#FFFDFCFC" FontWeight="Bold" Margin="150,25,150,25" Height="30" Click="btnLogin_Click" VerticalAlignment="Center"/>
         </StackPanel>

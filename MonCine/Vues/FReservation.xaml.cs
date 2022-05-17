@@ -22,11 +22,12 @@ namespace MonCine.Vues
         public List<Projection> Projections = new List<Projection>();
         public Projection SelectedProjection { get; set; }
         private DAL _dal;
-        public Abonne Abonne { get; set; }
+        public Abonne AbonneConnecte { get; set; }
         public FReservation(DAL dal)
         {
             InitializeComponent();
             _dal = dal;
+            AbonneConnecte = App.Current.Properties["CurrentUser"] as Abonne;
             InitializeList();
         }
 
@@ -60,7 +61,8 @@ namespace MonCine.Vues
         private void Enregistrer()
         {
             int places = 0;
-            if (int.TryParse(tbxNbReservations.Text, out places))
+            var nbPlacesIsValid = int.TryParse(tbxNbReservations.Text, out places);
+            if (nbPlacesIsValid)
             {
 
                 if (SelectedProjection.NbPlaces < places)
@@ -70,16 +72,16 @@ namespace MonCine.Vues
                 else
                 {
                     Reservation reservation = new Reservation(DateTime.Now, null, places, SelectedProjection);
-                    Abonne = App.Current.Properties["CurrentUser"] as Abonne;
-                    if (Abonne.Reservations==null)
+                    
+                    if (AbonneConnecte.Reservations==null)
                     {
-                        Abonne.Reservations = new List<Reservation>();
+                        AbonneConnecte.Reservations = new List<Reservation>();
                     }
-                    Abonne.Reservations.Add(reservation);
+                    AbonneConnecte.Reservations.Add(reservation);
 
                     SelectedProjection.NbPlaces -= places;
                     _dal.UpdateProjection(SelectedProjection);
-                    _dal.UpdateAbonne(Abonne);
+                    _dal.UpdateAbonne(AbonneConnecte);
                     _dal.AddReservation(reservation);
                     MessageBox.Show("Réservation effectuée");
                     InitializeList();

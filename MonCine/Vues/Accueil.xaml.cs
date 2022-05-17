@@ -20,13 +20,13 @@ namespace MonCine.Vues
     public partial class Accueil : Page
     {
         private DAL dal;
-        public Abonne Abonne;
+        public Abonne AbonneConnecte;
         public Accueil()
         {
             InitializeComponent();
             dal = new DAL();
-            Abonne = App.Current.Properties["CurrentUser"] as Abonne;
-            if (Abonne.isAdmin)
+            AbonneConnecte = App.Current.Properties["CurrentUser"] as Abonne;
+            if (AbonneConnecte.isAdmin)
             {
                 this.btnProjection.Content = "Gestion des projections";
             }
@@ -47,11 +47,8 @@ namespace MonCine.Vues
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //FProjections frmProjections = new FProjections(dal);
-            //
-            //this.NavigationService.Navigate(frmProjections);
 
-            if (Abonne.isAdmin)
+            if (AbonneConnecte.isAdmin)
             {
                 FProjections frmProjections = new FProjections(dal);
 
