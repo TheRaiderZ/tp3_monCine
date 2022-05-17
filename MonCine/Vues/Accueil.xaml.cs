@@ -20,11 +20,22 @@ namespace MonCine.Vues
     public partial class Accueil : Page
     {
         private DAL dal;
-        
+        public Abonne Abonne;
         public Accueil()
         {
             InitializeComponent();
             dal = new DAL();
+            Abonne = App.Current.Properties["CurrentUser"] as Abonne;
+            if (Abonne.isAdmin)
+            {
+                this.btnProjection.Content = "Gestion des projections";
+            }
+            else
+            {
+                this.btnProjection.Content = "Gestion des Réservations";
+                this.btnAbonne.Visibility = Visibility.Collapsed;
+                this.btnFilms.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -40,8 +51,18 @@ namespace MonCine.Vues
             //
             //this.NavigationService.Navigate(frmProjections);
 
-            FReservation frmReservation = new FReservation(dal);
-            this.NavigationService.Navigate(frmReservation);
+            if (Abonne.isAdmin)
+            {
+                FProjections frmProjections = new FProjections(dal);
+
+                this.NavigationService.Navigate(frmProjections);
+            }
+            else
+            {
+                FReservation frmReservation = new FReservation(dal);
+                this.NavigationService.Navigate(frmReservation);
+            }
+
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

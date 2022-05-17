@@ -22,6 +22,7 @@ namespace MonCine.Vues
         public List<Projection> Projections = new List<Projection>();
         public Projection SelectedProjection { get; set; }
         private DAL _dal;
+        public Abonne Abonne { get; set; }
         public FReservation(DAL dal)
         {
             InitializeComponent();
@@ -39,7 +40,7 @@ namespace MonCine.Vues
         {
             SelectedProjection = (Projection)listeProjections.SelectedItem;
             if (SelectedProjection == null) { return; }
-
+            
             txtPlaces.Content = SelectedProjection.NbPlaces.ToString();
         }
 
@@ -50,22 +51,45 @@ namespace MonCine.Vues
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Enregistrer();
+            if (SelectedProjection!=null)
+            {
+                Enregistrer();
+            }
         }
 
         private void Enregistrer()
         {
-            int places = 1;
-
-            if (SelectedProjection.NbPlaces < places)
+            int places = 0;
+            if (int.TryParse(tbxNbReservations.Text, out places))
             {
-                MessageBox.Show("Il ne reste pas assez de place dans cette projection.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                if (SelectedProjection.NbPlaces < places)
+                {
+                    MessageBox.Show("Il ne reste pas assez de place dans cette projection.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    Reservation reservation = new Reservation(DateTime.Now, null, places, SelectedProjection);
+                    Abonne = App.Current.Properties["CurrentUser"] as Abonne;
+                    if (Abonne.Reservations==null)
+                    {
+                        Abonne.Reservations = new List<Reservation>();
+                    }
+                    Abonne.Reservations.Add(reservation);
+
+                    SelectedProjection.NbPlaces -= places;
+                    _dal.UpdateProjection(SelectedProjection);
+                    _dal.UpdateAbonne(Abonne);
+                    _dal.AddReservation(reservation);
+                    MessageBox.Show("Réservation effectuée");
+                    InitializeList();
+                }
             }
             else
             {
-                Reservation reservation = new Reservation(DateTime.Now, null, 1, SelectedProjection);
-                _dal.AddReservation(reservation);
+                MessageBox.Show("Veuillez entrer un nombre de places valide.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

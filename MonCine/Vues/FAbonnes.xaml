@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:MonCine.Vues"
         mc:Ignorable="d"
       
-        Title="FAbonnes" Width="Auto"
-      Height="Auto">
+        MinHeight="510" MinWidth="975"
+        Title="FAbonnes">
     <Page.Resources>
         <DataTemplate x:Key="templateAbonne">
             <Grid Width="Auto">

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using MongoDB.Driver;
 using System.Windows;
+using System.Linq;
 
 namespace MonCine.Data
 {
@@ -454,6 +455,28 @@ namespace MonCine.Data
                 if (collection != null)
                 {
                     reservations = collection.FindSync(Builders<Reservation>.Filter.Empty).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'obtenir la collection " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return reservations;
+        }
+
+        public List<Reservation> ReadReservationOfAbonne(Abonne abonne)
+        {
+            var reservations = new List<Reservation>();
+
+            try
+            {
+                var collection = database.GetCollection<Reservation>("Reservations");
+                if (collection != null)
+                {
+                    reservations = collection.FindSync(x => x.Personne.Id == abonne.Id).ToList();
+                        //.a(x => x.Personne == abonne);
+
                 }
             }
             catch (Exception ex)

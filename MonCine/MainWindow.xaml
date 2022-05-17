@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:MonCine"
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
+        Height="510" Width="975"
         Title="MainWindow" >
     <DockPanel>
-        <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" Height="510" Width="975" />
+        <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden"  />
     </DockPanel>
 
 </Window>

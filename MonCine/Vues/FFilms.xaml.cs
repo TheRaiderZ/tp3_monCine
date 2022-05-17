@@ -102,6 +102,7 @@ namespace MonCine.Vues
             {
                 _dal.UpdateFilm(item);
             }
+            MessageBox.Show("Enregistrement effectué");
         }
 
         private void listeCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)

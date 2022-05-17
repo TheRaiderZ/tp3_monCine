@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,7 +39,7 @@ namespace MonCine.Vues
 
         private void fillLists()
         {
-            listAbonnes.ItemsSource = Abonnes;
+            listAbonnes.ItemsSource = Abonnes.Where(x => x.isAdmin == false);
             listeFilms.ItemsSource = Films; listeFilms.DataContext = Films;
             listeType.ItemsSource = Enum.GetValues(typeof(TypeRecompense));
         }
@@ -66,6 +67,7 @@ namespace MonCine.Vues
             Recompense newRecompense = new Recompense( type, film);
             SelectedAbonne.Recompenses.Add(newRecompense);
             _dal.AddRecompense(SelectedAbonne);
+            MessageBox.Show("Enregistrement effectué");
 
         }
 

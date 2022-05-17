@@ -24,7 +24,7 @@ namespace MonCine.Vues
 
         public List<Realisateur> Realisateurs = new List<Realisateur>();
         public List<Acteur> Acteurs = new List<Acteur>();
-        //public List<Film> FilmsVisionnés = new List<Film>();
+        public List<Film> FilmsVisionnés = new List<Film>();
         public Film SelectedFilm { get; set; }
 
         private DAL _dal;
@@ -61,15 +61,19 @@ namespace MonCine.Vues
 
         private List<Film> GetFilmsVisionnes()
         {
-            List<Film> filmsVisionnes = new List<Film>();
-            foreach (var film in Abonne.FilmVisionnés)
+            //List<Film> filmsVisionnes = new List<Film>();
+            if (Abonne.Reservations == null)
             {
-                if (film.DateProjection<DateTime.Now)
+                Abonne.Reservations = new List<Reservation>();
+            }
+            foreach (var reservation in Abonne.Reservations)
+            {
+                if (reservation.Projection.DateDebut<DateTime.Now)
                 {
-                    filmsVisionnes.Add(film);
+                    FilmsVisionnés.Add(reservation.Projection.Film);
                 }
             }
-            return filmsVisionnes;
+            return FilmsVisionnés;
         }
         
         private void PopulateListViews()
@@ -107,6 +111,7 @@ namespace MonCine.Vues
             //TODO: Enregistrer les changements
             
             _dal.UpdateAbonne(Abonne);
+            MessageBox.Show("Enregistrement effectué");
         }
 
         private void listeCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -189,11 +194,11 @@ namespace MonCine.Vues
             SelectedFilm = null;
             if (String.IsNullOrWhiteSpace(txtRecherche.Text))
             {
-                lstFilms.ItemsSource = Abonne.FilmVisionnés;
+                lstFilms.ItemsSource = Abonne.Reservations;
                 return;
             }
             List<Film> resultat = new List<Film>();
-            resultat = FiltrerFilmsParNom(Abonne.FilmVisionnés, txtRecherche.Text);
+            resultat = FiltrerFilmsParNom(FilmsVisionnés, txtRecherche.Text);
             lstFilms.ItemsSource = resultat;
 
         }
