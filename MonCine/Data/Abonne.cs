@@ -11,7 +11,8 @@ namespace MonCine.Data
         {
             this.Username = username;
             this.DateAdhesion = DateTime.Now;
-            this.FilmVisionnés = new List<Film>();
+            this.Reservations = new List<Reservation>();
+            this.Recompenses = new List<Recompense>();
             this.isAdmin = isAdmin;
 
         }
@@ -21,7 +22,8 @@ namespace MonCine.Data
             this.Username = username;
             this.DateAdhesion = DateTime.Now;
             this.Preferences = preferences;
-            this.FilmVisionnés = new List<Film>();
+            this.Reservations = new List<Reservation>();
+            this.Recompenses = new List<Recompense>();
             this.isAdmin = isAdmin;
         }
 
@@ -31,7 +33,7 @@ namespace MonCine.Data
         public DateTime DateAdhesion { get; set; }
         public List<Recompense> Recompenses { get; set; }
         public Preferences Preferences { get; set; }
-        public List<Film> FilmVisionnés { get; set; }
+        public List<Reservation> Reservations { get; set; }
         public bool isAdmin { get; set; }
 
         public override string ToString()

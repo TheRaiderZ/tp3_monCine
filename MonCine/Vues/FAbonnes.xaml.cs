@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,7 +39,7 @@ namespace MonCine.Vues
 
         private void fillLists()
         {
-            listAbonnes.ItemsSource = Abonnes;
+            listAbonnes.ItemsSource = Abonnes.Where(x => x.isAdmin == false);
             listeFilms.ItemsSource = Films; listeFilms.DataContext = Films;
             listeType.ItemsSource = Enum.GetValues(typeof(TypeRecompense));
         }
@@ -61,11 +62,33 @@ namespace MonCine.Vues
 
         private void enregistrement()
         {
-            TypeRecompense type = (TypeRecompense)listeType.SelectedItem;
-            Film film = (Film)listeFilms.SelectedItem;
-            Recompense newRecompense = new Recompense( type, film);
-            SelectedAbonne.Recompenses.Add(newRecompense);
-            _dal.AddRecompense(SelectedAbonne);
+            if (listAbonnes.SelectedItem != null)
+            {
+                if (listeFilms.SelectedItem != null)
+                {
+                    if (listeType.SelectedItem != null)
+                    {
+                        TypeRecompense type = (TypeRecompense)listeType.SelectedItem;
+                        Film film = (Film)listeFilms.SelectedItem;
+                        Recompense newRecompense = new Recompense( type, film);
+                        SelectedAbonne.Recompenses.Add(newRecompense);
+                        _dal.AddRecompense(SelectedAbonne);
+                        MessageBox.Show("Enregistrement effectué");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Il faut que vous sélectionner un type.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Il faut que vous sélectionner un film.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Il faut que vous sélectionner un abonné.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 

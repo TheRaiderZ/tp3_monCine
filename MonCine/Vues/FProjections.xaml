@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MonCine.Vues"
         mc:Ignorable="d"
-        Title="Projections" Height="450" Width="800">
+        Title="Projections" Height="Auto" Width="Auto">
     <!--<Page.Resources>
         <DataTemplate x:Key="FilmItemTemplate">
 
@@ -28,12 +28,12 @@
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="247*"/>
         </Grid.ColumnDefinitions>
 
         <!--</ListView>-->
-        <Button x:Name="btnBack" Content="Retour" Margin="20,10,326,0" Click="btnBack_Click" MinWidth="104" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Height="30" VerticalAlignment="Center">
+        <Button x:Name="btnBack" Content="Retour" Margin="20,12,26,0" Click="btnBack_Click" MinWidth="104" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Height="30" VerticalAlignment="Top">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -41,7 +41,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btnCreer" Content="Créer Projection" Margin="173,15,173,0" Click="btnCreer_Click" MinWidth="104" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Height="30" VerticalAlignment="Top">
+        <Button x:Name="btnCreer" Content="Créer Projection" Margin="20,12,617,0" Click="btnCreer_Click" MinWidth="104" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Height="30" VerticalAlignment="Top" Grid.Column="1">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -49,28 +49,29 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Border Margin="10,10,10,94" Grid.Column="1" Grid.Row="1" CornerRadius="10" Background="#FF042A2B">
-            <GroupBox Header="Infos des projections"  Background="#FF042A2B" Foreground="White" BorderThickness="0" Margin="-398,0,0,0">
+        <Border Margin="25,10,25,94" Grid.Row="1" CornerRadius="10" Background="#FF042A2B" Grid.ColumnSpan="2">
+            <GroupBox Header="Infos des projections"  Background="#FF042A2B" Foreground="White" BorderThickness="0" HorizontalAlignment="Stretch" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="94*"/>
-                        <RowDefinition Height="179*"/>
+                        <RowDefinition Height="62*"/>
+                        <RowDefinition Height="46*"/>
+                        <RowDefinition Height="43*"/>
                     </Grid.RowDefinitions>
                     <Label Content="Projections :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="White" Height="26" Width="74"/>
                     <Label Content="Salle :" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Grid.Row="1" Foreground="White" Height="26" Width="73"/>
                     <Label Content="Début :" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Grid.Row="1" Foreground="White" Height="26" Width="73"/>
-                    <Label Content="Fin :" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Grid.Row="1" Foreground="White" Height="26" Width="73"/>
+                    <Label Content="Fin :" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Grid.Row="2" Foreground="White" Height="26" Width="73"/>
                     <ListBox  x:Name="listeProjections" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="88,10,172,10" SelectionMode="Single" SelectionChanged="listeProjections_SelectionChanged" />
                     <ComboBox SelectedValuePath="Id"  x:Name="listeSalle" Margin="87,5,172,0" Grid.Row="1" Height="22" VerticalAlignment="Top" SelectionChanged="listeSalle_SelectionChanged"/>
-                    <DatePicker Margin="87,53,172,101" Grid.Row="1" x:Name="dtpDebut" SelectedDateChanged="dtpDebut_SelectedDateChanged"/>
-                    <DatePicker Margin="88,110,172,44" Grid.Row="1" x:Name="dtpFin" SelectedDateChanged="dtpFin_SelectedDateChanged"/>
+                    <DatePicker Margin="87,53,172,0" Grid.Row="1" x:Name="dtpDebut" SelectedDateChanged="dtpDebut_SelectedDateChanged" Height="24" VerticalAlignment="Top"/>
+                    <DatePicker Margin="88,18,172,0" Grid.Row="2" x:Name="dtpFin" SelectedDateChanged="dtpFin_SelectedDateChanged" VerticalAlignment="Top"/>
                 </Grid>
             </GroupBox>
         </Border>
-        <Button x:Name="btnSave" Content="Enregistrer les changements" Margin="364,0,264,32" Click="btnSave_Click" Grid.Row="1" Height="40" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnSave" Content="Enregistrer les changements" Margin="214,0,264,32" Click="btnSave_Click" Grid.Row="1" Height="40" VerticalAlignment="Bottom" Grid.Column="1"/>
 
     </Grid>
 </Page>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using MongoDB.Driver;
 using System.Windows;
+using System.Linq;
 
 namespace MonCine.Data
 {
@@ -126,8 +127,8 @@ namespace MonCine.Data
             try
             {
                 var collection = database.GetCollection<Abonne>("Abonnes");
-                var film = collection.Find(x => x.Username == username).First();
-                return film;
+                var abonne = collection.Find(x => x.Username == username).FirstOrDefault();
+                return abonne;
             }
             catch (Exception ex)
             {
@@ -234,7 +235,7 @@ namespace MonCine.Data
             try
             {
                 var collection = database.GetCollection<Film>("Films");
-                var film = collection.Find(x=>x.Nom==nom).First();
+                var film = collection.Find(x=>x.Nom==nom).FirstOrDefault();
                 return film;
             }
             catch (Exception ex)
@@ -299,7 +300,7 @@ namespace MonCine.Data
             try
             {
                 var collection = database.GetCollection<Film>("Films");
-                films = collection.Find(x=>x.SurAffiche==true).ToList();
+                films = collection.Find(x=>x.SurAffiche==true).ToList();    
             }
             catch (Exception ex)
             {
@@ -441,7 +442,6 @@ namespace MonCine.Data
         }
 
         
-
         #endregion
 
         #region CRUD Reservation
@@ -465,6 +465,28 @@ namespace MonCine.Data
             return reservations;
         }
 
+        public List<Reservation> ReadReservationOfAbonne(Abonne abonne)
+        {
+            var reservations = new List<Reservation>();
+
+            try
+            {
+                var collection = database.GetCollection<Reservation>("Reservations");
+                if (collection != null)
+                {
+                    reservations = collection.FindSync(x => x.Personne.Id == abonne.Id).ToList();
+                        //.a(x => x.Personne == abonne);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Impossible d'obtenir la collection " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return reservations;
+        }
+
         public void AddReservation(Reservation reservation)
         {
 
@@ -473,12 +495,6 @@ namespace MonCine.Data
             {
                 var collection = database.GetCollection<Reservation>("Reservations");
                 collection.InsertOne(reservation);
-
-                Projection projection = reservation.Projection;
-                projection.NbPlaces = projection.NbPlaces - reservation.NbPlaces;
-
-                var collectionProj = database.GetCollection<Projection>("Projections");
-                collectionProj.ReplaceOne((x => x.Id == projection.Id), projection);
             }
             catch (Exception ex)
             {

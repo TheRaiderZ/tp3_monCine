@@ -1,0 +1,8 @@
+﻿<UserControl x:Class="MonCine.Vues.RatingsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MonCine.Vues"
+    Height="Auto" Width="Auto">
+    <StackPanel x:Name="spStars" Orientation="Horizontal" HorizontalAlignment="Center">
+    </StackPanel>
+</UserControl>

@@ -6,25 +6,31 @@
         xmlns:local="clr-namespace:MonCine.Vues"
       
         mc:Ignorable="d"
-        Title="Films"  d:DesignHeight="450" d:DesignWidth="800">
+        MinHeight="510" MinWidth="975"
+        Title="Films"  d:DesignHeight="530" d:DesignWidth="930">
     <Page.Resources>
         <DataTemplate x:Key="FilmItemTemplate">
 
-            <Grid Width="Auto" >
-                <Label Content="{Binding Nom}" VerticalAlignment="Top" Height="24" Margin="0,1,248,0" HorizontalAlignment="Right" Width="92"/>
-                <Label Content="{Binding DateSortie}" HorizontalAlignment="Right" Margin="0,25,248,0" Width="92" Height="26" FontSize="10"/>
+            <Grid Width="495" >
+                <Label Content="{Binding Nom}" VerticalAlignment="Top" Height="24" Margin="0,0,343,0" HorizontalAlignment="Right" Width="92"/>
+                <Label Content="{Binding DateSortie}" HorizontalAlignment="Right" Margin="0,24,343,1" Width="92" Height="26" FontSize="10"/>
                 <Image HorizontalAlignment="Left" Height="48" VerticalAlignment="Center" Width="48" Source="/Vues/Logo.png"/>
-                <Label Content="{Binding CategorieToString}" Margin="0,1,109,0" VerticalAlignment="Top" Height="24" FontSize="10" HorizontalAlignment="Right" Width="106"/>
-                <Label Content="{Binding Realisateur}" HorizontalAlignment="Right" Margin="0,25,109,0" Height="26" Width="106" FontSize="10" FontWeight="Normal"/>
-                <CheckBox IsChecked="{Binding SurAffiche}"  Content="À l'affiche" Margin="323,0,0,0" VerticalAlignment="Center" />
-                <Label Content="Cat. :" Margin="0,1,215,0" VerticalAlignment="Top" Height="24" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right" Width="35"/>
-                <Label Content="Réal. :" HorizontalAlignment="Right" Margin="0,25,212,0" Height="26" Width="38" FontSize="10" FontWeight="Bold"/>
-
+                <Label Content="{Binding CategorieToString}" Margin="0,2,192,0" VerticalAlignment="Top" Height="24" FontSize="10" HorizontalAlignment="Right" Width="106"/>
+                <Label Content="{Binding Realisateur}" HorizontalAlignment="Right" Margin="0,26,192,-1" Height="26" Width="106" FontSize="10" FontWeight="Normal"/>
+                <CheckBox IsChecked="{Binding SurAffiche}"  Content="À l'affiche" Margin="405,0,-15,0" VerticalAlignment="Center" />
+                <Label Content="Cat. :" Margin="0,2,298,0" VerticalAlignment="Top" Height="24" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right" Width="35"/>
+                <Label Content="Réal. :" HorizontalAlignment="Right" Margin="0,26,295,-1" Height="26" Width="38" FontSize="10" FontWeight="Bold"/>
+                <local:RatingsControl x:Name="ratings1" 
+                                      BackgroundColor="#FFE8EEF2"
+                                      StarForegroundColor="Orange"
+                                      StarSize="10"
+                                      StarOutlineColor="DarkGray"
+                                    Value="{Binding ValeurSur5}" NumberOfStars="5" Minimum="0" HorizontalAlignment="Left" Margin="308,18,0,0" VerticalAlignment="Top" Width="47"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Margin="0,0,0,0" Background="#FF246EE9" OpacityMask="Black">
+    <Grid Background="#FF246EE9" OpacityMask="Black">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="8*"/>

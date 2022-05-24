@@ -33,4 +33,11 @@
   "Age": 64,
   "Nom": "5",
   "Prenom": "Acteur"
+},{
+  "_id": {
+    "$oid": "6273e19cdec169e2b247ecdf"
+  },
+  "Age": 64,
+  "Nom": "6",
+  "Prenom": "Acteur"
 }]

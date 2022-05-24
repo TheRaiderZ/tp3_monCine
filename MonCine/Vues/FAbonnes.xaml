@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MonCine.Vues"
         mc:Ignorable="d"
-        Title="FAbonnes" Height="450" Width="800">
+      
+        MinHeight="510" MinWidth="975"
+        Title="FAbonnes">
     <Page.Resources>
         <DataTemplate x:Key="templateAbonne">
             <Grid Width="Auto">
@@ -49,15 +51,32 @@
         <Border Margin="10,10,10,94" Grid.Column="1" Grid.Row="1" CornerRadius="10" Background="#FF042A2B">
             <GroupBox Header="Info Abonné" Background="#FF042A2B" Foreground="White" BorderThickness="0" Margin="0,0,0,-51">
                 <Grid>
-                    <Label Content="Films:" HorizontalAlignment="Left" Margin="63,91,0,0" VerticalAlignment="Top" Foreground="White" Width="45" Height="32"/>
-                    <ListBox  x:Name="listeFilms" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="132,81,10,136" SelectionMode="Single" local:ListBoxExtensions.SelectedItemList="{Binding ElementName=listeFilms, Path=SelectedItem.Films}" />
-                    <Label Content="Type:" HorizontalAlignment="Left" Margin="62,28,0,0" VerticalAlignment="Top" Foreground="White" Width="46" Height="32"/>
-                    <ComboBox SelectedValuePath="Id" SelectedItem="{Binding ElementName=listAbonnes, Path=SelectedItem.TypeRecompense}" x:Name="listeType" Margin="132,28,10,264"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60*"/>
+                        <RowDefinition Height="143*"/>
+                        <RowDefinition Height="57*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Films:" HorizontalAlignment="Left" Margin="28,18,0,0" VerticalAlignment="Top" Foreground="White" Width="52" Height="32" Grid.Row="1"/>
+                    <ListBox  x:Name="listeFilms" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="80,8,10,23" SelectionMode="Single" local:ListBoxExtensions.SelectedItemList="{Binding ElementName=listeFilms, Path=SelectedItem.Films}" Grid.Row="1" />
+                    <Label Content="Type:" HorizontalAlignment="Left" Margin="27,28,0,0" VerticalAlignment="Top" Foreground="White" Width="53" Height="32"/>
+                    <ComboBox SelectedValuePath="Id" SelectedItem="{Binding ElementName=listAbonnes, Path=SelectedItem.TypeRecompense}" x:Name="listeType" Margin="78,33,10,0" Height="22" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <ComboBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-0.687"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ComboBox.RenderTransform>
+                    </ComboBox>
+                    <Button x:Name="btnSave" Content="Enregistrer la récompense" Click="btnSave_Click" Margin="80,10,10,0" Height="40" VerticalAlignment="Top" Grid.Row="2"/>
 
                 </Grid>
             </GroupBox>
         </Border>
-        <Button x:Name="btnSave" Content="Enregistrer la récompense" Margin="89,266,89,0" Click="btnSave_Click" Grid.Column="1" Grid.Row="1" Height="40" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

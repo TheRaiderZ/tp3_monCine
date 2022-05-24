@@ -20,11 +20,11 @@ namespace MonCine.Vues
     public partial class Profil : Window
     {
 
-        public Abonne Abonne { get; set; }
+        public Abonne AbonneConnecte { get; set; }
 
         public List<Realisateur> Realisateurs = new List<Realisateur>();
         public List<Acteur> Acteurs = new List<Acteur>();
-        //public List<Film> FilmsVisionnés = new List<Film>();
+        public List<Film> FilmsVisionnés = new List<Film>();
         public Film SelectedFilm { get; set; }
 
         private DAL _dal;
@@ -32,49 +32,55 @@ namespace MonCine.Vues
         {
 
             InitializeComponent();
-            ratings1.StarSize = 20;
-            ratings1.Value = 0.5M;
-            //ratings1.NumberOfStars = 5;
-            ratings1.BackgroundColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF042A2B");
-            ratings1.StarForegroundColor = Brushes.Orange;
-            ratings1.StarOutlineColor = Brushes.DarkGray;
+            SetupStarsRating();
             DataContext = this;
             _dal = dal;
             GetUser();
             ReadEntities();
             PopulateListViews();
         }
+        private void SetupStarsRating()
+        {
+            ratings.StarSize = 20;
+            ratings.Value = 0.5M;
+            //ratings1.NumberOfStars = 5;
+            ratings.BackgroundColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF042A2B");
+            ratings.StarForegroundColor = Brushes.Orange;
+            ratings.StarOutlineColor = Brushes.DarkGray;
+        }
         private void GetUser()
         {
-            Abonne = App.Current.Properties["CurrentUser"] as Abonne;
-            if (Abonne == null)
+            AbonneConnecte = App.Current.Properties["CurrentUser"] as Abonne;
+            if (AbonneConnecte == null)
             {
                 MessageBox.Show("Veuillez vous connecter");
                 this.Close();
             }
-            if (Abonne.Preferences == null)
+            if (AbonneConnecte.Preferences == null)
             {
-                Abonne.Preferences = new Preferences();
+                AbonneConnecte.Preferences = new Preferences();
             }
 
         }
 
         private List<Film> GetFilmsVisionnes()
         {
-            List<Film> filmsVisionnes = new List<Film>();
-            foreach (var film in Abonne.FilmVisionnés)
+            if (AbonneConnecte.Reservations == null)
             {
-                if (film.DateProjection<DateTime.Now)
+                AbonneConnecte.Reservations = new List<Reservation>();
+            }
+            foreach (var reservation in AbonneConnecte.Reservations)
+            {
+                if (reservation.Projection.DateDebut<DateTime.Now)
                 {
-                    filmsVisionnes.Add(film);
+                    FilmsVisionnés.Add(reservation.Projection.Film);
                 }
             }
-            return filmsVisionnes;
+            return FilmsVisionnés;
         }
         
         private void PopulateListViews()
         {
-            //listeFilms.ItemsSource = Films; listeFilms.DataContext = Films;
             Realisateurs = Realisateurs.OrderBy(a => a.Nom).ToList();
             listeRealisateurs.ItemsSource = Realisateurs;
             Acteurs = Acteurs.OrderBy(a => a.Nom).ToList();
@@ -86,7 +92,6 @@ namespace MonCine.Vues
 
         private void ReadEntities()
         {
-            //Films = _dal.ReadFilms();
             Realisateurs = _dal.ReadRealisateurs();
             Acteurs = _dal.ReadActeurs();
         }
@@ -104,57 +109,59 @@ namespace MonCine.Vues
         
         public void EnregistrerChangements()
         {
-            //TODO: Enregistrer les changements
             
-            _dal.UpdateAbonne(Abonne);
+            _dal.UpdateAbonne(AbonneConnecte);
+            MessageBox.Show("Enregistrement effectué");
         }
 
         private void listeCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Abonne == null)
+            if (AbonneConnecte == null)
             {
                 return;
             }
-            if (this.listeCategories.SelectedItems.Count > Preferences.MAX_CATEGORIES)
+            int nbCategoriesSelected = this.listeCategories.SelectedItems.Count;
+            if (nbCategoriesSelected > Preferences.MAX_CATEGORIES)
             {
                 this.listeCategories.SelectedItems.RemoveAt(Preferences.MAX_CATEGORIES - 1);
             }
             else
             {
-                Abonne.Preferences.CategoriesFavoris = listeCategories.SelectedItems.Cast<Categorie>().ToList();
-                //Abonne.Preferences.AjouterCategorie(listeCategories.SelectedItems.Cast<Categorie>().ToList().Last());
+                AbonneConnecte.Preferences.CategoriesFavoris = listeCategories.SelectedItems.Cast<Categorie>().ToList();
             }
         }
 
         private void listeActeurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Abonne == null)
+            if (AbonneConnecte == null)
             {
                 return;
             }
-            if (this.listeActeurs.SelectedItems.Count > Preferences.MAX_ACTEURS)
+            int nbActeursSelected = this.listeActeurs.SelectedItems.Count;
+            if (nbActeursSelected > Preferences.MAX_ACTEURS)
             {
                 this.listeActeurs.SelectedItems.RemoveAt(Preferences.MAX_ACTEURS - 1);
             }
             else
             {
-                Abonne.Preferences.ActeursFavoris = listeActeurs.SelectedItems.Cast<Acteur>().ToList();
+                AbonneConnecte.Preferences.ActeursFavoris = listeActeurs.SelectedItems.Cast<Acteur>().ToList();
             }
         }
 
         private void listeRealisateurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Abonne == null)
+            if (AbonneConnecte == null)
             {
                 return;
             }
-            if (this.listeRealisateurs.SelectedItems.Count > Preferences.MAX_REALISATEURS)
+            int nbRealisateursSelected = this.listeRealisateurs.SelectedItems.Count;
+            if (nbRealisateursSelected > Preferences.MAX_REALISATEURS)
             {
                 this.listeRealisateurs.SelectedItems.RemoveAt(Preferences.MAX_REALISATEURS - 1);
             }
             else
             {
-                Abonne.Preferences.RealisateursFavoris = listeRealisateurs.SelectedItems.Cast<Realisateur>().ToList();
+                AbonneConnecte.Preferences.RealisateursFavoris = listeRealisateurs.SelectedItems.Cast<Realisateur>().ToList();
             }
         }
 
@@ -162,9 +169,9 @@ namespace MonCine.Vues
         {
             txtCurrentNote.Content = sliderNote.Value.ToString();
 
-            if (ratings1 != null)
+            if (ratings != null)
             {
-                ratings1.Value = (decimal)sliderNote.Value/2;;
+                ratings.Value = (decimal)sliderNote.Value/2;;
 
             }
 
@@ -182,18 +189,20 @@ namespace MonCine.Vues
                 _dal.UpdateFilm(SelectedFilm);
             }
         }
+        
         //Barre de recherche
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             lstFilms.SelectedItem = null;
             SelectedFilm = null;
+            
             if (String.IsNullOrWhiteSpace(txtRecherche.Text))
             {
-                lstFilms.ItemsSource = Abonne.FilmVisionnés;
+                lstFilms.ItemsSource = AbonneConnecte.Reservations;
                 return;
             }
             List<Film> resultat = new List<Film>();
-            resultat = FiltrerFilmsParNom(Abonne.FilmVisionnés, txtRecherche.Text);
+            resultat = FiltrerFilmsParNom(FilmsVisionnés, txtRecherche.Text);
             lstFilms.ItemsSource = resultat;
 
         }
